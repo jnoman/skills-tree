@@ -126,8 +126,11 @@ BEGIN
           END LOOP;
       CLOSE cur;
     END IF;
+
+    SET done = FALSE;
     
     OPEN cur1;
+
         ins_loop: LOOP
             FETCH cur1 INTO ids;
             IF done THEN

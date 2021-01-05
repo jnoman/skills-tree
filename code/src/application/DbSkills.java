@@ -15,7 +15,7 @@ public class DbSkills implements Interface {
 			Class.forName("com.mysql.jdbc.Driver");
 			con =DriverManager.getConnection("jdbc:mysql://localhost:3306/skills", "root","");
 		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
+			Main.getAlert("erruer de connection", "Connection");
 		}
 		return con;
 	}
@@ -80,13 +80,13 @@ public class DbSkills implements Interface {
 	
 	public static void getCompetenceApprenant(int id) {
 		try {
-			listeNiveau.clear();
+			listeCompetence.clear();
 			String query ="SELECT id_competence,title,users.reference,niveau from niveaux,competences,users WHERE users.reference=competences.reference and users.id=niveaux.id_user and niveaux.id_competence=competences.id and users.id="+id;
 			Connection con = DbSkills.getConnection();
 			PreparedStatement ps=con.prepareStatement(query);
 			ResultSet rs= ps.executeQuery();
 			while(rs.next()) {
-				listeNiveau.add(new Niveau(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+				listeCompetence.add(new Competence(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -95,13 +95,13 @@ public class DbSkills implements Interface {
 	}
 	
 	public static void updateCompetences(int id){
-		for (Niveau niveau : listeNiveau) {
+		for (Competence competence : listeCompetence) {
 			try {
 				String query = "UPDATE `niveaux` SET `niveau`=? WHERE id_competence=? and id_user=?";
 				Connection con = DbSkills.getConnection();
 				PreparedStatement ps = con.prepareStatement(query);
-				ps.setInt(1, niveau.getNiveau());
-				ps.setInt(2, niveau.getId());
+				ps.setInt(1, competence.getNiveau());
+				ps.setInt(2, competence.getId());
 				ps.setInt(3, id);
 				ps.executeUpdate();
 				con.close();

@@ -91,7 +91,7 @@ public class Main extends Application implements Interface {
 		email.relocate(50, 150);
 		panelConnexion.getChildren().add(email);
 		
-		TextField txt_email = new TextField("jamalnoman@gmail.com");
+		TextField txt_email = new TextField();
 		txt_email.relocate(50, 180);
 		panelConnexion.getChildren().add(txt_email);
 		
@@ -100,7 +100,6 @@ public class Main extends Application implements Interface {
 		panelConnexion.getChildren().add(password);
 		
 		PasswordField txt_password = new PasswordField();
-		txt_password.setText("aaaaaaaa");
 		txt_password.relocate(50, 280);
 		panelConnexion.getChildren().add(txt_password);
 		
@@ -253,27 +252,27 @@ public class Main extends Application implements Interface {
 		panelApprenant.relocate(0, 0);
 		root.getChildren().add(panelApprenant);
 		
+		panelCompetence.relocate(0, 0);
+		panelApprenant.getChildren().add(panelCompetence);
+		
 		Label title = new Label(apprenant.getNom()+" "+apprenant.getPrenom());
 		title.relocate(50, 30);
 		title.getStyleClass().add("title");
-		panelApprenant.getChildren().add(title);
+		panelCompetence.getChildren().add(title);
 		
 		Label reference = new Label(apprenant.getReference());
 		reference.relocate(500, 40);
 		reference.setStyle("-fx-font-size: 14px;");
-		panelApprenant.getChildren().add(reference);
+		panelCompetence.getChildren().add(reference);
 		
-		panelCompetence.relocate(0, 100);
-		panelApprenant.getChildren().add(panelCompetence);
+		int y=110;
 		
-		int y=10;
-		
-		for(i = 0; i < listeNiveau.size(); i++) {
-			Niveau niveau = listeNiveau.get(i);
+		for(i = 0; i < listeCompetence.size(); i++) {
+			Competence competence = listeCompetence.get(i);
 			
 			int x=30;
 			
-			Label competence1 = new Label(niveau.getTitle());
+			Label competence1 = new Label(competence.getTitle());
 			competence1.relocate(x, y);
 			panelCompetence.getChildren().add(competence1);
 			
@@ -287,7 +286,7 @@ public class Main extends Application implements Interface {
 				panelCompetence.getChildren().add(niveau1);
 				niveau1.getStyleClass().add("lapel-niveau");
 				
-				if (j < niveau.getNiveau() ) {
+				if (j < competence.getNiveau() ) {
 					niveau1.getStyleClass().add("lapel-niveau-true");
 				}
 				
@@ -309,11 +308,11 @@ public class Main extends Application implements Interface {
 			
 			i++;
 			
-			niveau = listeNiveau.get(i);
+			competence = listeCompetence.get(i);
 			
 			x=470;
 			
-			Label competence2 = new Label(niveau.getTitle());
+			Label competence2 = new Label(competence.getTitle());
 			competence2.relocate(x, y);
 			panelCompetence.getChildren().add(competence2);
 			ArrayList<Label> groupLabel1 = new ArrayList<Label>();
@@ -325,7 +324,7 @@ public class Main extends Application implements Interface {
 				panelCompetence.getChildren().add(niveau1);
 				niveau1.getStyleClass().add("lapel-niveau");
 				
-				if (j < niveau.getNiveau() ) {
+				if (j < competence.getNiveau() ) {
 					niveau1.getStyleClass().add("lapel-niveau-true");
 				}
 				
@@ -357,12 +356,12 @@ public class Main extends Application implements Interface {
 			public void handle(ActionEvent arg0) {
 				DbSkills.updateCompetences(apprenant.getIdUser());
 				getAlert("La modification est terminée avec succès", "Modifier");
-				if(listeNiveau.size()==8) {
+				if(listeCompetence.size()==8) {
 					boolean flag = true;
 					
-					for (int i = 0; i< listeNiveau.size() && flag; i++)
+					for (int i = 0; i< listeCompetence.size() && flag; i++)
 				    {
-				        if(listeNiveau.get(i).getNiveau() != 3) flag = false;
+				        if(listeCompetence.get(i).getNiveau() != 3) flag = false;
 				    }
 					
 					if(flag == true) {
@@ -386,7 +385,7 @@ public class Main extends Application implements Interface {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				listeNiveau.clear();
+				listeCompetence.clear();
 				listeLabel.clear();
 				panelCompetence.getChildren().clear();
 				panelApprenant.getChildren().remove(panelCompetence);
@@ -446,12 +445,12 @@ public class Main extends Application implements Interface {
 		    	
 		    	int y=30;
 				
-				for(int i = 0; i < listeNiveau.size(); i++) {
-					Niveau niveau = listeNiveau.get(i);
+				for(int i = 0; i < listeCompetence.size(); i++) {
+					Competence Competence = listeCompetence.get(i);
 					
 					int x=30;
 					
-					Label cometence1 = new Label(niveau.getTitle());
+					Label cometence1 = new Label(Competence.getTitle());
 					cometence1.relocate(x, y);
 					panelCompetence.getChildren().add(cometence1);
 					
@@ -463,7 +462,7 @@ public class Main extends Application implements Interface {
 						panelCompetence.getChildren().add(niveau1);
 						niveau1.getStyleClass().add("lapel-niveau");
 						
-						if (j < niveau.getNiveau() ) {
+						if (j < Competence.getNiveau() ) {
 							niveau1.getStyleClass().add("lapel-niveau-true");
 						}
 						
@@ -473,11 +472,11 @@ public class Main extends Application implements Interface {
 					
 					i++;
 					
-					niveau = listeNiveau.get(i);
+					Competence = listeCompetence.get(i);
 					
 					x=470;
 					
-					Label cometence2 = new Label(niveau.getTitle());
+					Label cometence2 = new Label(Competence.getTitle());
 					cometence2.relocate(x, y);
 					panelCompetence.getChildren().add(cometence2);
 					
@@ -489,7 +488,7 @@ public class Main extends Application implements Interface {
 						panelCompetence.getChildren().add(niveau1);
 						niveau1.getStyleClass().add("lapel-niveau");
 						
-						if (j < niveau.getNiveau() ) {
+						if (j < Competence.getNiveau() ) {
 							niveau1.getStyleClass().add("lapel-niveau-true");
 						}
 						
@@ -510,9 +509,10 @@ public class Main extends Application implements Interface {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				listeNiveau.clear();
+				listeCompetence.clear();
 				listeApprenant.clear();
 				panelCompetence.getChildren().clear();
+				panelStaff.getChildren().clear();
 				root.getChildren().remove(panelStaff);
 				connexionInscription();
 			}
@@ -548,10 +548,10 @@ public class Main extends Application implements Interface {
 					listeLabel.get(i).get(k).getStyleClass().add("lapel-niveau-true");
 				}
 			}
-			listeNiveau.get(i).setNiveau(j+1);
+			listeCompetence.get(i).setNiveau(j+1);
 		} else if (j == 2) {
 			listeLabel.get(i).get(j).getStyleClass().remove("lapel-niveau-true");
-			listeNiveau.get(i).setNiveau(j);
+			listeCompetence.get(i).setNiveau(j);
 		}
 		else {
 			boolean ret = true;
@@ -563,10 +563,10 @@ public class Main extends Application implements Interface {
 			}
 			if(ret == true) {
 				listeLabel.get(i).get(j).getStyleClass().remove("lapel-niveau-true");
-				listeNiveau.get(i).setNiveau(j);
+				listeCompetence.get(i).setNiveau(j);
 			}
 			else {
-				listeNiveau.get(i).setNiveau(j+1);
+				listeCompetence.get(i).setNiveau(j+1);
 			}
 		}
 		

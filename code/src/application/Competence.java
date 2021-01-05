@@ -6,7 +6,16 @@ public class Competence {
    private int id;
    private String title;
    private String reference;
+   private int niveau;
    
+   
+   
+	public int getNiveau() {
+	return niveau;
+	}
+	public void setNiveau(int niveau) {
+		this.niveau = niveau;
+	}
 	public int getId() {
 		return id;
 	}
@@ -26,11 +35,12 @@ public class Competence {
 		this.reference = reference;
 	}
 	
-	public Competence(int id, String title, String reference) {
+	public Competence(int id, String title, String reference, int niveau) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.reference = reference;
+		this.niveau = niveau;
 	}
    
    
