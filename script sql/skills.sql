@@ -49,7 +49,7 @@ CREATE TABLE `competences` (
 --
 
 CREATE TABLE `users` (
-  `id` int(10) NOT NULL,
+  `id` int(10) auto_increment,
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
   `email` varchar(40) NOT NULL,
@@ -172,3 +172,6 @@ DELIMITER ;
 INSERT into users (`nom`,`prenom`,`email`,`password`,`role`) values('elwahabi','hanae','helwahabi@simplon.co','aaaaaaaa','staff');
 
 INSERT into users (`nom`,`prenom`,`email`,`password`,`reference`) values('noman','jamal eddine','jamalnoman@gmail.com','aaaaaaaa','Développeur⋅se web et web mobile');
+
+ALTER TABLE users ADD UNIQUE (email);
+

@@ -1,6 +1,8 @@
 package application;
 	
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
@@ -211,14 +213,19 @@ public class Main extends Application implements Interface {
 			@Override
 			public void handle(ActionEvent arg0) {
 				if (!txt_nom.getText().equals("") && !txt_prenom.getText().equals("") && !txt_email.getText().equals("") && !txt_password.getText().equals("") && !combo_reference.getSelectionModel().getSelectedItem().equals("")) {
-					Apprenant appenant =new Apprenant(txt_nom.getText(), txt_prenom.getText(), txt_email.getText(), txt_password.getText(), combo_reference.getSelectionModel().getSelectedItem());
-					int ret = DbSkills.inscription(appenant);
-					if(ret == 1) {
-						getAlert("Inscription est terminée avec succès", "Inscription");
-						hideAndShow(panelInscription, panelConnexion, 1000);
-					}else {
-						getAlert("Erreur d'inscription", "Inscription");
+					if (validate_email(txt_email.getText())) {
+						Apprenant appenant =new Apprenant(txt_nom.getText(), txt_prenom.getText(), txt_email.getText(), txt_password.getText(), combo_reference.getSelectionModel().getSelectedItem());
+						int ret = DbSkills.inscription(appenant);
+						if(ret == 1) {
+							getAlert("Inscription est terminée avec succès", "Inscription");
+							hideAndShow(panelInscription, panelConnexion, 1000);
+						}else {
+							getAlert("Erreur d'inscription", "Inscription");
+						}
+					} else {
+						getAlert("Email est invalide", "Inscription");
 					}
+					
 				} else {
 					getAlert("Merci de remplir tous les champs", "Inscription");
 				}
@@ -568,6 +575,12 @@ public class Main extends Application implements Interface {
 				listeCompetence.get(i).setNiveau(j+1);
 			}
 		}
-		
 	}
+	
+		
+		public static boolean validate_email(String email) {
+				Pattern regex = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+		        Matcher matcher = regex.matcher(email);
+		        return matcher.find();
+		}
 }

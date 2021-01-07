@@ -28,6 +28,7 @@ public class DbSkills implements Interface {
 			PreparedStatement ps=con.prepareStatement(query);
 			ps.setString(1, email);
 			ps.setString(2, password);
+			System.out.println(ps);
 			ResultSet rs= ps.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(6).equals("apprenant")) {
