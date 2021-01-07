@@ -56,6 +56,7 @@ public class DbSkills implements Interface {
 			ps.setString(4, user.getPassword());
 			ps.setString(5, user.getReference());
 			ret = ps.executeUpdate();
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

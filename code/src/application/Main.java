@@ -30,7 +30,6 @@ import javafx.scene.Group;
 public class Main extends Application implements Interface {
 	static Group root = new Group();
 	static ImageView background = new ImageView(new Image("file:background.png"));
-	static boolean showsStatus = false;
 	static Pane panelConnexion = new Pane();
 	static Pane panelInscription = new Pane();
 	static Pane panelApprenant = new Pane();

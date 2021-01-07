@@ -36,7 +36,7 @@ use skills;
 
 
 CREATE TABLE `competences` (
-  `id` int(10) NOT NULL auto_increment,
+  `id` int(10) auto_increment,
   `title` varchar(100) NOT NULL,
   `reference` varchar(100) NOT NULL,
   primary key (id)
@@ -49,7 +49,7 @@ CREATE TABLE `competences` (
 --
 
 CREATE TABLE `users` (
-  `id` int(10) NOT NULL auto_increment,
+  `id` int(10) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
   `email` varchar(40) NOT NULL,
